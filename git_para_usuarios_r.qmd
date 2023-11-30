@@ -1,0 +1,858 @@
+---
+# title: "Capacitación en R y herramientas de productividad"
+# author: "Abril 2021"
+format:
+  # html:
+  #   code-fold: true
+  revealjs:
+    auto-stretch: false
+    margin: 0
+    slide-number: true
+    scrollable: true
+    preview-links: auto
+    page-layout: custom
+    logo: imagenes/logo_portada2.png
+    css: ine_quarto_styles.css
+    # footer: <https://quarto.org>
+
+engine: knitr
+
+---
+
+
+# 
+
+[<img src="imagenes/logo_portada2.png" width="20%"/>]{.center-justified}
+
+[**Mentoría Censo: Codificación**]{.big-par .center-justified}
+
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
+
+[**Introducción al Procesamiento de Lenguaje Natural**]{.big-par .center-justified}
+
+[**octubre 2023**]{.big-par .center-justified}
+
+
+## Bienvenidas y bienvenidos
+
+
+[<img src="imagenes/bienvenida.jpg" width="100%" />]{.center-justified}
+
+
+
+## Contenidos de la clase {.medium-par}
+
+
+::: fragment
+- ¿Qué es Git y para qué sirve?
+- Principales conceptos asociados a Git
+- Esquema de trabajo en git
+- Conflictos de merge
+- Árbol de commits
+- Uso de ramas
+- El .gitignore
+- Casos de uso
+- Recomendaciones sobre uso de git]
+:::
+
+::: fragment
+**Objetivo de la clase**
+
+- Habilitar en el uso básico de git (git clone, git push, git pull) en conjunto con la herramienta Rstudio
+:::
+
+
+
+## Contenidos de la clase {.medium-par}
+
+
+[**MUY IMPORTANTE:**]{.big-par-red} 
+
+::: {.incremental }
+- La clase no está pensada para ser seguida en vivo. Se recomienda hacerlo cuando 
+sea subida a las redes sociales del INE.
+
+
+- Se recomienda seguir la clase desde computadores personales, pues plataformas como `GitHub` suelen estar
+sujetas a bloqueos institucionales.
+
+
+
+- La clase se realizará utilizando `GitHub` como plataforma de control de versiones. Es necesario crear una
+cuenta cuando para seguir la clase.
+  - Otras alternativas: `Gitlab`, `Bitbucket`.
+  
+- La clase está basada en Sistemas Operativos Windows, sin embargo, no debiesen existir grandes diferencias
+al aplicar lo enseñado en Sistemas de Mac o Linux.
+:::
+
+
+
+## ¿Qué es Git y para qué sirve?
+
+:::: r-stack
+::: {.fragment .fade-in-then-out}
+<img src="imagenes/documento_final.gif" width="70%" />
+
+:::
+
+
+::: {.fragment .fade-in-then-out}
+
+<img src="imagenes/ml_cycle.webp" width="80%" />
+
+:::
+
+::: {.fragment .fade-in-then-out}
+![](imagenes/groupproject.jpg){width=70%}
+
+
+:::
+
+
+::::
+
+## ¿Qué es Git y para qué sirve? {.medium-par}
+
+::: {.fragment } 
+Es un sistema de control de versiones (VCS).
+
+  - Permiten a personas o equipos administrar los cambios del código de un proyecto en el tiempo.
+:::
+
+::: fragment
+Funciona como una máquina del tiempo
+
+- Cada cierto tiempo sacamos una "foto" del estado de todos los archivos del proyecto
+
+- Estas fotos no desaparecen
+
+- Siempre es posible volver a una foto anterior
+
+Además, nos dice quién hizo qué y cuándo en  nuestro proyecto
+
+Permite que varias personas trabajen en un mismo proyecto sin molestarse unos a otros
+::: 
+
+
+## ¿Qué es Git y para qué sirve? {.medium-par}
+
+
+**Nos protege:**
+
+::: incremental
+- De nuestros propios errores
+
+- De fallas en el almacenamiento físico (podemos sincronizar nuestros cambios en la nube)
+
+:::
+
+::: fragment
+<img src="imagenes/git.png" width="140" />
+
+[Descargar aquí](https://git-scm.com/downloads)
+:::
+
+
+
+
+::: fragment
+**Veamos rápidamente cómo instalarlo**
+:::
+
+
+:::notes
+Detalles relevantes:
+
+- Selección de editor de texto
+- Mencionar tema de nombres de rama principal
+- Mencionar usar segunda opción para el tema PATH
+- Mantener SSH que viene con git
+- Mantener OpenSSL
+- Mantener MinTTY
+- Setear fast-forward para git pull
+
+
+
+
+:::
+
+
+
+
+
+
+## ¿Qué es Git y para qué sirve? {.medium-par}
+
+::: fragment
+<img src="imagenes/esquema_reproducibilidad.png" width="800" />
+
+
+
+Nos acercamos a la reproducibilidad
+:::
+
+::: fragment
+Aún nos falta manejar las dependencias para llegar al estándar dorado (sistemas como
+[Docker](https://www.docker.com/) nos permiten llegar ahí)
+:::
+
+
+
+
+## ¿Qué es Git y para qué sirve? {.medium-par}
+
+
+
+**¿Cuándo sirve?**
+
+::: incremental
+- Proyectos de código de naturaleza no lineal (ciclos de experimentación, código que evoluciona e itera, etc).
+- Proyectos de código colaborativo.
+:::
+
+::: fragment
+**¿Cuándo [no]{.red} sirve?**
+:::
+
+::: incremental
+- Proyectos de desarrollo lineal (no hay necesidad de volver atrás).
+- Proyectos que no estén basados en texto plano (por ejemplo, archivos .docx de Microsoft Word).
+- Proyectos de muy baja complejidad (el costo de implementarlo resulta mayor al beneficio).
+
+:::
+
+::: fragment
+
+![](imagenes/blob.jpg){height=200}
+:::
+
+
+
+## Principales conceptos {.medium-par}
+
+Git nos permite navegar de manera "sencilla" por las distintas versiones de un archivo
+
+
+![](imagenes/diagrama.png){width=300}
+
+
+**Podemos rastrear dónde y cuándo se producen los errores**
+
+
+![](imagenes/pikachu.png){width=300}
+
+
+
+
+
+
+
+
+
+## Estados en Git {.medium-par}
+
+
+<img src="imagenes/estados-git.png" width="500" />
+
+
+Tenemos 3 estados para nuestros archivos:
+
+- Modificado
+
+- "En escena" (*staging area*)
+
+- Confirmado o comprometido (*committed*)
+
+
+## El mueble {.medium-par}
+::::r-stack
+
+::: {.fragment fragment-index=1}
+![](imagenes/escritorio_plan.png){width=100%}
+:::
+
+::: {.fragment fragment-index=3}
+![](imagenes/escritorio_commit1.png){width=100%}
+
+:::
+
+::: {.fragment fragment-index=5}
+![](imagenes/escritorio_commit1b.png){width=100%}
+
+:::
+
+::::
+
+::: {.fragment fragment-index=2}
+- Para aterrizar los conceptos usaremos el proyecto de creación de un escritorio como analogía.
+
+- En este momento nuestro escritorio es solo un plan: un repositorio vacío.
+
+- En la medida en que vayamos avanzando iremos haciendo _commits_ que guarden nuestro progreso.
+
+- Por ejemplo, luego de tomar una tabla, cortarla, barnizarla, etc, tenemos nuestro primer hito: tenemos una pata lista. 
+
+  - Este podría ser merecedor de un primer _commit_!
+
+:::
+
+::: {.fragment fragment-index=4}
+
+- Tal vez querríamos guardar nuestro progreso antes del barnizado. En ese caso nuestro _commit_ sería antes
+
+:::
+::: {.fragment fragment-index=6}
+- Esto nos permitiría **volver atrás** y cambiar el color del barniz si nos arrepentimos en algún momento.
+:::
+
+
+
+
+
+## Principales conceptos {.medium-par}
+
+Ciclos sucesivos de *modificar, poner en escena y confirmar* van generando el historial de cambios de nuestro repositorio
+
+
+
+Cada _commit_ es una foto del estado de nuestros archivos a la que podemos acceder cuando queramos
+
+
+
+- **NO** podemos acceder a estados intermedios entre dos _commit_
+
+
+
+- Queremos hacer _commit_ frecuentemente y con un número de cambios manejable
+
+:::: {layout-ncol=3}
+
+::: {.fragment }
+![Commit 1](imagenes/escritorio_commit1b.png){width=10%}
+
+:::
+
+::: {.fragment }
+![](imagenes/escritorio_commit1c.png){width=10%}
+:::
+
+
+::: {.fragment }
+![Commit 2](imagenes/escritorio_commit1.png){width=10%}
+:::
+
+::::
+
+::: fragment
+Si quiero trabajar de manera individual, no necesito más que lo que hemos visto hasta ahora
+:::
+
+:::fragment
+
+**Creemos nuestro primer repositorio!**
+
+:::
+
+::: notes
+
+- La parte de la pata se llama tope
+
+
+:::
+
+
+
+## Principales conceptos {.medium-par}
+
+
+**¿Qué pasa si necesito trabajar con más personas? ¿Si quiero un respaldo online de mi trabajo?**
+
+::: fragment
+<img src="imagenes/diagrama-git.png" width="600" /> 
+
+
+
+**Gitlab, Github, etc se usan para trabajar con más personas, agregando el concepto
+del repositorio remoto**
+
+:::
+
+## Principales conceptos
+
+<img src="imagenes/flujo_git.png" width="480" /> 
+[ <font size="2"> Ilustración por Allison Horst, https://allisonhorst.com/git-github</font> ]{.pull-right}
+
+
+
+
+
+## Repositorio remoto {.medium-par}
+
+
+<img src="imagenes/diagrama-colaborativo.png" width="600" />
+
+
+
+**Varias personas aportan a un mismo repositorio**
+
+::: {layout-ncol=2}
+
+::: fragment
+![](imagenes/logos.png){width=20%}
+:::
+
+::: fragment
+![](imagenes/logo_distinto.png){width=20%}
+:::
+
+:::
+
+::: fragment
+
+**Veamos cómo crear y clonar un repositorio remoto**
+
+:::
+
+
+::: notes
+
+- Ir a Github
+- Crear repo
+- Mostrar cómo clonar con SSH
+- Mostrar cómo clonar con Token
+
+
+:::
+
+
+
+
+
+
+
+## Esquema de trabajo en Git
+
+
+
+<img src="https://i.gifer.com/2DAN.gif" width="450" />
+
+
+
+Los commit nos permiten sujetarnos a la roca
+
+
+
+En terreno peligroso, es mejor hacer más commits.
+
+
+
+Si nos caemos, tendremos un punto del cual sujetarnos
+
+
+
+
+
+
+
+
+## Esquema de trabajo en Git
+
+Luego de hacer nuestros _commit_, usualmente vamos a querer enviarlos al repositorio
+remoto para que el resto pueda verlos a través de un _push_
+
+
+
+Antes de hacer un _push_, es necesario actualizar nuestro proyecto con los cambios que otros/as colegas puedan haber realizado desde la última vez que nos sincronizamos con el repositorio remoto. Para esto, usamos `git pull`
+
+
+
+Si es que fue posible traer los cambios remotos **sin problemas** y teniendo seguridad que nuestro código funciona, procedemos a empujar nuestros cambios con un `git push`
+
+
+
+Por lo tanto, el flujo normal de trabajo es siempre:
+
+
+
+## commit - pull - push
+
+
+
+<div style="float: left;">
+<img src="imagenes/no_olvidar.png" width="65%"  />
+</div>
+
+
+
+
+
+<!  EJERCICIO 1 >
+
+**Probemos nuestro primer flujo `git`! **
+
+
+
+template: diapo-basica
+
+# ¿Sin problemas?
+
+Al hacer `pull` traemos los cambios que han hecho el resto de colegas a nuestro
+repositorio local y `git` trata de incorporarlo con los `commit` que hemos realizado
+desde la última vez que hicimos `pull`. A esto se le llama `merge`.
+
+
+
+Si los cambios que existen en nuestros `commit` no tienen intersección con los de
+los `commit` de nuestros colegas, no habrá problema. Dos casos:
+
+
+
+- Cambios en archivos diferentes
+
+
+
+- Cambios en el mismo archivo, pero distintas líneas
+
+
+
+Ahora, si nuestros `commit` y algún `commit` recibido en el `pull` cambian la misma
+línea de un archivo, tendremos .red[problemas]: un conflicto de _merge_.
+
+
+
+.center[
+<img src="imagenes/git_merge.gif" width="35%" />
+]
+
+
+
+<! EJERCICIO 2 >
+**Probemos cómo generar y resolver un conflicto de merge**
+
+
+
+
+# Conflicto de merge
+
+<div style="float: left;">
+<img src="imagenes/merge_conflict1.png" width="90%" />
+</div>
+
+
+< Su script se verá similar a esto
+
+
+
+
+
+Básicamente `git` nos muestra cómo están las líneas que tienen cambios simultáneos en nuestro repositorio y en el script en el repositorio remoto.
+
+Aquí debemos editar el script para que quede funcional, de acuerdo a los objetivos del proyecto y del script. Para esto no existe receta, podrían mantenerse ambos cambios, uno de los dos o ninguno:
+
+
+
+.center[
+<img src="imagenes/merge_conflict2.png" width="85%" />
+]
+
+
+
+Luego de editar el script, es necesario realizar un `commit` y luego un `push` con lo que se soluciona el conflicto de `merge`.
+
+
+
+**Nota importante:** cuando hacemos un `pull` con conflicto de `merge`, nos aparecerán todos los cambios al repositorio que ha habido desde la última vez que hicimos `pull`  en la pestaña Git. Solo debemos preocuparnos por los archivos que aparezcan con un símbolo de “U”, que implican que ese archivo específico tiene conflicto de merge.
+
+
+
+
+
+# Conflicto de merge
+
+Ejemplo de lo anterior:
+
+.center[
+<img src="imagenes/merge_conflict3.png" width="85%" />
+]
+
+La terminal también nos indicará los archivos con conflicto:
+
+.center[
+<img src="imagenes/merge_conflict4.png" width="85%" />
+]
+
+
+
+
+# El árbol de commits
+
+
+<div style="float: right;">
+<img src="imagenes/arbol_commit1.gif" width="80%" />
+</div>
+
+
+.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+
+
+
+.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+
+
+
+.texto-chico[**¿Qué es una rama?** ]
+
+.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+
+
+
+
+
+
+
+
+# El árbol de commits
+
+
+<div style="float: right;">
+<img src="imagenes/arbol_commit2.gif" width="80%" />
+</div>
+
+
+.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+
+
+
+.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+
+
+
+.texto-chico[**¿Qué es una rama?** ]
+.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+
+
+.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
+
+
+
+
+
+
+# El árbol de commits
+
+
+
+<div style="float: right;">
+<img src="imagenes/arbol_commit3.gif" width="80%" />
+</div>
+
+
+.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+
+
+
+.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+
+
+
+.texto-chico[**¿Qué es una rama?** ]
+.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+
+
+.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
+
+.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]
+
+
+
+# El árbol de commits
+
+
+
+<div style="float: right;">
+<img src="imagenes/arbol_commit4.gif" width="80%" />
+</div>
+
+
+.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+
+
+
+.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+
+
+
+.texto-chico[**¿Qué es una rama?** ]
+.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+
+
+.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
+
+.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]
+
+.texto-chico[Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.]
+
+
+
+**¡Veamos el árbol de _commits_ de nuestro proyecto actual!**
+
+
+
+
+
+
+# Trabajando con ramas
+
+Es la forma más segura de trabajar en git: nuestro trabajo no tocará la rama principal hasta que lo decidamos
+
+
+
+Cada desarrollador puede trabajar en una rama independiente, sin molestar a los demás
+
+
+
+En proyectos grandes, los desarrolladores **en general** no tienen permiso para empujar directamente a la rama main/master, tienen que "pedir permiso" para hacerlo
+
+
+
+Existe un administrador encargado de revisar y unir (`merge`) las contribuciones a la rama central
+
+- Decide si el aporte debe incorporarse
+
+- Resuelve conflictos
+
+
+
+Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer
+`commit`, `push` y `pull`
+
+
+
+**¡Creemos nuestras primeras ramas!**
+
+
+
+
+
+
+# El .gitignore
+
+Cuando trabajamos con repositorios remotos, muchas veces existen archivos que queremos mantener solo en nuestro computador o que no son realmente compatibles con un repositorio git, por lo que no queremos subirlos a la nube:
+
+
+<div style="float: right;">
+<img src="imagenes/gitignore.png" width="90%" />
+</div>
+
+
+
+- Archivos que no son pertinentes al objetivo del proyecto.
+
+
+
+- Archivos temporales y de caché.
+
+
+
+- Archivos personales (por ejemplo, .Rprofile, scripts de pruebas).
+
+
+
+- Archivos muy grandes (por ejemplo, tablas de datos pesadas).
+
+
+
+Estos los anotamos en el archivo .gitignore, que es un archivo de texto simple.
+
+
+
+**Importante:** .gitignore tiene algunas notaciones particulares, pero lo más relevante es que  el * sirve como comodín
+
+
+
+**¡Hagamos pruebas de uso del .gitignore!**
+
+
+
+
+
+
+
+# Recomendaciones sobre cómo interactuar con git
+
+Revisamos cómo interactuar con git a través de la terminal y RStudio
+
+
+
+**¿Cuál es mejor?**
+
+No hay una respuesta correcta, depende de cada persona. La botonera es más sencilla, pero, por lo mismo, más incompleta y menos transparente.
+
+
+
+Recomendación general: si es que les acomoda, para operaciones más sencillas (`add`, `commit`, `push`, `pull`), la botonera de RStudio basta. Si queremos dar un uso más avanzado, la terminal puede darnos más control.
+
+
+
+Existen alternativas intermedias como GitKraken, que proporcionan una interfaz de usuario enfocada en git, permitiendo más operaciones que las posibles en la botonera de RStudio. Tarea para la casa.
+
+
+
+
+
+
+
+# Torpedo
+
+**git add .**: poner todo en escena
+
+**git commit -m "mensaje personalizado"**: confirmar cambios
+
+**git push nombre_rama**: empujar a rama remota
+
+**git clone url_repositorio**: clonar un repositorio
+
+**git pull nombre_rama**: traer cosas del repositorio
+
+**git checkout nombre_rama**: ir a una rama
+
+**git branch**: ver todas las ramas
+
+**git branch nombre_rama**: crear una rama
+
+
+
+
+
+
+
+
+
+# Material de consulta
+
+[Guía muy completa en español](https://git-scm.com/book/es/v2)
+
+[Git con enfoque en R](https://happygitwithr.com/)
+
+
+
+
+template: portada
+
+
+
+
+
+
+
+# Ejemplo de uso
+
+
+.pull-center[
+<img src="imagenes/esquema_git.png" width="800" />
+]
+
+
+
+
