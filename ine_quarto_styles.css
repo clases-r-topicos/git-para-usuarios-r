@@ -295,6 +295,19 @@ Settings for colors
   color: lightgray;
 }
 
+.inline-fragment {
+  display: flex;
+}
+
+.inline-fragment p {
+  padding-right: -10px;
+}
+
+
+.float-right {
+  
+}
+
 /*
 ----------------------------------------------------------------------------------------------------
 Settings for figures

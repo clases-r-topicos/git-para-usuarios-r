@@ -24,13 +24,13 @@ engine: knitr
 
 [<img src="imagenes/logo_portada2.png" width="20%"/>]{.center-justified}
 
-[**Mentoría Censo: Codificación**]{.big-par .center-justified}
+[**INE Educa: Clases abiertas de R**]{.big-par .center-justified}
+
+[**Git para usuarios y usuarias de R**]{.big-par .center-justified}
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**Introducción al Procesamiento de Lenguaje Natural**]{.big-par .center-justified}
-
-[**octubre 2023**]{.big-par .center-justified}
+[**Diciembre 2023**]{.big-par .center-justified}
 
 
 ## Bienvenidas y bienvenidos
@@ -52,7 +52,7 @@ engine: knitr
 - Uso de ramas
 - El .gitignore
 - Casos de uso
-- Recomendaciones sobre uso de git]
+- Recomendaciones sobre uso de git
 :::
 
 ::: fragment
@@ -79,11 +79,11 @@ sujetas a bloqueos institucionales.
 
 
 - La clase se realizará utilizando `GitHub` como plataforma de control de versiones. Es necesario crear una
-cuenta cuando para seguir la clase.
+cuenta para seguir la clase en su totalidad.
   - Otras alternativas: `Gitlab`, `Bitbucket`.
   
 - La clase está basada en Sistemas Operativos Windows, sin embargo, no debiesen existir grandes diferencias
-al aplicar lo enseñado en Sistemas de Mac o Linux.
+al aplicar lo enseñado en Sistemas Mac o Linux.
 :::
 
 
@@ -129,11 +129,16 @@ Funciona como una máquina del tiempo
 
 - Siempre es posible volver a una foto anterior
 
-Además, nos dice quién hizo qué y cuándo en  nuestro proyecto
+- Incluyen nombre y fecha de quién sacó la foto, además de un mensaje explicativo de 
+qué cambios incluye
 
 Permite que varias personas trabajen en un mismo proyecto sin molestarse unos a otros
 ::: 
 
+::: fragment
+![](imagenes/version_control.png){width=70%}
+[ <font size="2"> Ilustración por Sara A. Metwalli, https://saraametwalli.medium.com/</font> ]{.pull-right}
+:::
 
 ## ¿Qué es Git y para qué sirve? {.medium-par}
 
@@ -288,6 +293,7 @@ Tenemos 3 estados para nuestros archivos:
 - Para aterrizar los conceptos usaremos el proyecto de creación de un escritorio como analogía.
 
 - En este momento nuestro escritorio es solo un plan: un repositorio vacío.
+  - Tenemos una idea de qué queremos construir, pero no sabemos el camino exacto: materiales, colores, formas pueden ir cambiando en el camino.
 
 - En la medida en que vayamos avanzando iremos haciendo _commits_ que guarden nuestro progreso.
 
@@ -350,13 +356,14 @@ Si quiero trabajar de manera individual, no necesito más que lo que hemos visto
 
 :::fragment
 
-**Creemos nuestro primer repositorio!**
+**Creemos nuestro primer repositorio en RStudio y hagamos nuestros primeros commit!**
 
 :::
 
 ::: notes
 
 - La parte de la pata se llama tope
+- Creamos proyecto git desde RStudio (File->New Project)
 
 
 :::
@@ -430,33 +437,7 @@ del repositorio remoto**
 
 
 
-
-## Esquema de trabajo en Git
-
-
-
-<img src="https://i.gifer.com/2DAN.gif" width="450" />
-
-
-
-Los commit nos permiten sujetarnos a la roca
-
-
-
-En terreno peligroso, es mejor hacer más commits.
-
-
-
-Si nos caemos, tendremos un punto del cual sujetarnos
-
-
-
-
-
-
-
-
-## Esquema de trabajo en Git
+## Esquema de trabajo en Git {.medium-par}
 
 Luego de hacer nuestros _commit_, usualmente vamos a querer enviarlos al repositorio
 remoto para que el resto pueda verlos a través de un _push_
@@ -474,145 +455,125 @@ Si es que fue posible traer los cambios remotos **sin problemas** y teniendo seg
 Por lo tanto, el flujo normal de trabajo es siempre:
 
 
+::: {.fragment .big-par}
+**commit - pull - push**
+:::
 
-## commit - pull - push
+::: fragment
+![](imagenes/no_olvidar.png){.pull-left width=25%}
 
+:::
 
+## ¿Sin problemas? {.medium-par}
 
-<div style="float: left;">
-<img src="imagenes/no_olvidar.png" width="65%"  />
-</div>
-
-
-
-
-
-<!  EJERCICIO 1 >
-
-**Probemos nuestro primer flujo `git`! **
-
-
-
-template: diapo-basica
-
-# ¿Sin problemas?
-
+::: fragment
 Al hacer `pull` traemos los cambios que han hecho el resto de colegas a nuestro
 repositorio local y `git` trata de incorporarlo con los `commit` que hemos realizado
 desde la última vez que hicimos `pull`. A esto se le llama `merge`.
+:::
 
-
-
+::: fragment
 Si los cambios que existen en nuestros `commit` no tienen intersección con los de
 los `commit` de nuestros colegas, no habrá problema. Dos casos:
+:::
 
-
-
+::: fragment
 - Cambios en archivos diferentes
+:::
 
-
-
+::: fragment
 - Cambios en el mismo archivo, pero distintas líneas
+:::
 
-
-
+::: fragment
 Ahora, si nuestros `commit` y algún `commit` recibido en el `pull` cambian la misma
-línea de un archivo, tendremos .red[problemas]: un conflicto de _merge_.
+línea de un archivo, tendremos [problemas]{.red}: un conflicto de _merge_.
+:::
 
 
-
-.center[
+::: fragment
 <img src="imagenes/git_merge.gif" width="35%" />
-]
+:::
 
-
-
-<! EJERCICIO 2 >
+::: fragment
 **Probemos cómo generar y resolver un conflicto de merge**
+:::
 
 
 
+## Conflicto de merge {.medium-par}
 
-# Conflicto de merge
-
+::: fragment
 <div style="float: left;">
 <img src="imagenes/merge_conflict1.png" width="90%" />
 </div>
 
 
-< Su script se verá similar a esto
+<-- Su script se verá similar a esto
+:::
 
 
 
-
-
+::: fragment
 Básicamente `git` nos muestra cómo están las líneas que tienen cambios simultáneos en nuestro repositorio y en el script en el repositorio remoto.
 
 Aquí debemos editar el script para que quede funcional, de acuerdo a los objetivos del proyecto y del script. Para esto no existe receta, podrían mantenerse ambos cambios, uno de los dos o ninguno:
+:::
 
 
-
-.center[
+::: fragment
 <img src="imagenes/merge_conflict2.png" width="85%" />
-]
+
 
 
 
 Luego de editar el script, es necesario realizar un `commit` y luego un `push` con lo que se soluciona el conflicto de `merge`.
+:::
 
-
-
+::: fragment
 **Nota importante:** cuando hacemos un `pull` con conflicto de `merge`, nos aparecerán todos los cambios al repositorio que ha habido desde la última vez que hicimos `pull`  en la pestaña Git. Solo debemos preocuparnos por los archivos que aparezcan con un símbolo de “U”, que implican que ese archivo específico tiene conflicto de merge.
+:::
 
 
 
 
-
-# Conflicto de merge
+## Conflicto de merge {.medium-par}
 
 Ejemplo de lo anterior:
 
-.center[
+
 <img src="imagenes/merge_conflict3.png" width="85%" />
-]
 
 La terminal también nos indicará los archivos con conflicto:
 
-.center[
+
 <img src="imagenes/merge_conflict4.png" width="85%" />
-]
 
 
 
 
-# El árbol de commits
+
+## El árbol de commits {.medium-par}
 
 
 <div style="float: right;">
 <img src="imagenes/arbol_commit1.gif" width="80%" />
 </div>
 
+::: fragment
+El árbol de commits es una representación visual de la historia de nuestro proyecto.
+:::
 
-.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+::: fragment
+Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.
+:::
 
-
-
-.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
-
-
-
-.texto-chico[**¿Qué es una rama?** ]
-
-.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
-
+::: fragment
+**¿Qué es una rama?** Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+:::
 
 
-
-
-
-
-
-# El árbol de commits
+## El árbol de commits {.medium-par}
 
 
 <div style="float: right;">
@@ -620,26 +581,26 @@ La terminal también nos indicará los archivos con conflicto:
 </div>
 
 
-.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+El árbol de commits es una representación visual de la historia de nuestro proyecto.
 
 
 
-.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.
 
 
 
-.texto-chico[**¿Qué es una rama?** ]
-.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+**¿Qué es una rama?** 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
 
 
-.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
-
-
-
+Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
 
 
-# El árbol de commits
+
+
+
+## El árbol de commits {.medium-par}
 
 
 
@@ -648,25 +609,25 @@ La terminal también nos indicará los archivos con conflicto:
 </div>
 
 
-.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+El árbol de commits es una representación visual de la historia de nuestro proyecto.
 
 
 
-.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.
 
 
 
-.texto-chico[**¿Qué es una rama?** ]
-.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+**¿Qué es una rama?** 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
 
 
-.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
+ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
-.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]
+La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
 
 
 
-# El árbol de commits
+## El árbol de commits {.medium-par}
 
 
 
@@ -675,23 +636,23 @@ La terminal también nos indicará los archivos con conflicto:
 </div>
 
 
-.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]
+El árbol de commits es una representación visual de la historia de nuestro proyecto.
 
 
 
-.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]
+Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.
 
 
 
-.texto-chico[**¿Qué es una rama?** ]
-.texto-chico[Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. ]
+**¿Qué es una rama?** 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
 
 
-.texto-chico[ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.]
+ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
-.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]
+La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
 
-.texto-chico[Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.]
+Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.
 
 
 
@@ -700,53 +661,144 @@ La terminal también nos indicará los archivos con conflicto:
 
 
 
+## El árbol de commits {.medium-par}
 
-
-# Trabajando con ramas
-
-Es la forma más segura de trabajar en git: nuestro trabajo no tocará la rama principal hasta que lo decidamos
-
-
-
-Cada desarrollador puede trabajar en una rama independiente, sin molestar a los demás
-
-
-
-En proyectos grandes, los desarrolladores **en general** no tienen permiso para empujar directamente a la rama main/master, tienen que "pedir permiso" para hacerlo
-
-
-
-Existe un administrador encargado de revisar y unir (`merge`) las contribuciones a la rama central
-
-- Decide si el aporte debe incorporarse
-
-- Resuelve conflictos
-
-
-
-Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer
-`commit`, `push` y `pull`
-
-
-
-**¡Creemos nuestras primeras ramas!**
-
-
-
-
-
-
-# El .gitignore
-
-Cuando trabajamos con repositorios remotos, muchas veces existen archivos que queremos mantener solo en nuestro computador o que no son realmente compatibles con un repositorio git, por lo que no queremos subirlos a la nube:
 
 
 <div style="float: right;">
-<img src="imagenes/gitignore.png" width="90%" />
+<img src="imagenes/arbol_commit5.gif" width="80%" />
 </div>
 
 
+El árbol de commits es una representación visual de la historia de nuestro proyecto.
 
+
+
+Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.
+
+
+
+**¿Qué es una rama?** 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+
+
+ Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
+
+La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
+
+Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.
+
+
+
+**¡Veamos el árbol de _commits_ de nuestro proyecto actual!**
+
+
+
+
+## Trabajando con ramas {.medium-par}
+
+::: incremental
+
+- Es la forma más segura de trabajar en git: nuestro trabajo no tocará la rama principal hasta que lo decidamos
+
+
+
+- Cada persona desarrolladora puede trabajar en una rama independiente, sin molestar a los demás
+
+
+
+- En proyectos grandes, quienes desarrollan el proyecto, **en general**, no tienen permiso para empujar directamente a la rama main/master, tienen que "pedir permiso" para hacerlo
+
+
+
+- Existe una persona administradora encargada de revisar y unir (`merge`) las contribuciones a la rama central
+
+  - Decide si el aporte debe incorporarse
+
+  - Resuelve conflictos
+
+
+
+- Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer
+`commit`, `push` y `pull`
+
+:::
+
+
+## Trabajando con ramas {.medium-par}
+:::: r-stack
+
+::: {.fragment fragment-index=3 .fade-in-then-out}
+![Plan original (rama main)](imagenes/escritorio_commit3.png)
+:::
+
+::: {.fragment fragment-index=4 .fade-in-then-out}
+![Nuevo plan (rama prueba_cajon_redondo)](imagenes/escritorio_rama1.png)
+:::
+
+::: {.fragment fragment-index=5 .fade-in-then-out}
+![Nuevo plan commit #1 (rama prueba_cajon_redondo)](imagenes/escritorio_rama2.png)
+:::
+
+::: {.fragment fragment-index=6 .fade-in-then-out}
+![Nuevo plan commit #2 (rama prueba_cajon_redondo)](imagenes/escritorio_rama3.png)
+:::
+
+::: {.fragment fragment-index=7 .fade-in}
+![Plan original (rama main)](imagenes/escritorio_commit3.png)
+:::
+
+
+::::
+
+
+::: {.fragment fragment-index=1 }
+Por otro lado, las ramas son particularmente útiles en un contexto experimental: queremos probar una variación y no estamos
+seguros si será incorporada o no.
+:::
+
+::: {.fragment fragment-index=2 }
+Volvamos a nuestro mueble. Digamos que su estado de avance es el siguiente:
+:::
+
+
+
+::: {.fragment fragment-index=4 }
+Sin embargo, se nos ocurre innovar y probar un nuevo tipo de cajón
+:::
+
+::: {.fragment fragment-index=5 }
+Avanzamos en nuestros commits
+:::
+
+::: {.fragment fragment-index=6 }
+Terminamos nuestro experimento y vemos que no nos resultó satisfactorio
+:::
+
+::: {.fragment fragment-index=7 }
+Podemos volver sin problemas a nuestro commit inicial y abandonar nuestra rama
+:::
+
+::: fragment
+
+**¡Probemos en RStudio cómo crear nuestras primeras ramas!**
+:::
+
+
+
+## El .gitignore {.medium-par}
+
+::: fragment
+Cuando trabajamos con repositorios remotos, muchas veces existen archivos que queremos mantener solo en nuestro computador o que no son realmente compatibles con un repositorio git, por lo que no queremos subirlos a la nube:
+:::
+
+::: fragment
+<div style="float: right;">
+<img src="imagenes/gitignore.png" width="90%" />
+</div>
+:::
+
+::: incremental
 - Archivos que no son pertinentes al objetivo del proyecto.
 
 
@@ -760,50 +812,80 @@ Cuando trabajamos con repositorios remotos, muchas veces existen archivos que qu
 
 
 - Archivos muy grandes (por ejemplo, tablas de datos pesadas).
+:::
 
-
-
+::: fragment
 Estos los anotamos en el archivo .gitignore, que es un archivo de texto simple.
+::::
 
-
-
+::: fragment
 **Importante:** .gitignore tiene algunas notaciones particulares, pero lo más relevante es que  el * sirve como comodín
+:::
 
 
-
+::: fragment
 **¡Hagamos pruebas de uso del .gitignore!**
+:::
+
+
+
+## Casos de uso dentro del INE
+
+- Un equipo dentro del INE necesitaba reformular la imputación de una de sus variables.
+Este era un proceso complejo, por lo que fue necesario el uso de una rama para su desarrollo.
+
+- La marcha blanca de una encuesta contenía scripts que eran diferentes al del resto del procesamiento de la encuesta.
+ Para no tener que lidiar con ellos, se optó por marcar el commit final de la marcha blanca con una rama, luego, si era
+ necesario volver a esos scripts, bastaba con realizar un `git checkout scripts_mb` para volver a estos.
+ 
+- Luego de sincronizar mi código con lo que está en la nube (`git pull`) cierto código dejó de funcionar. Bastó con revisar
+el historial de commits para notar quién había hecho cambios en el script, lo que permitió resolver el problema rápidamente
+luego de una conversación.
+
+
+## Recomendaciones sobre cómo interactuar con git {.medium-par}
+
+
+En esta clase nos centramos en la interacción con git a través de RStudio
+
+Este nos permite acceder a los comandos básicos que revisamos
+
+Sin embargo, si queremos hacer un uso más avanzado de git, tendríamos que usar la consola
+
+Algunos comandos a los que no tenemos acceso desde RStudio: `git merge `, `git tag`, `git cherry-pick`, `git status`, `git reset` (con todas sus opciones)
+
+En particular para el merge de ramas, usar la consola nos resultará inevitable.
+
+
+## Resumiendo
+
+::: incremental
+
+
+- Aprendimos qué es git, cuándo usarlo y cuándo no
+
+- Revisamos conceptos básicos y su aplicación en RStudio
+
+- Revisamos algunos casos de uso dentro de las oficinas del INE
+
+
+
+::: notes
+
+Con esto debiésemos quedar al menos habilitados para un uso básico de git.
+
+Recomendación: practicar, practicar, practicar.
+
+:::
+
+:::
 
 
 
 
 
 
-
-# Recomendaciones sobre cómo interactuar con git
-
-Revisamos cómo interactuar con git a través de la terminal y RStudio
-
-
-
-**¿Cuál es mejor?**
-
-No hay una respuesta correcta, depende de cada persona. La botonera es más sencilla, pero, por lo mismo, más incompleta y menos transparente.
-
-
-
-Recomendación general: si es que les acomoda, para operaciones más sencillas (`add`, `commit`, `push`, `pull`), la botonera de RStudio basta. Si queremos dar un uso más avanzado, la terminal puede darnos más control.
-
-
-
-Existen alternativas intermedias como GitKraken, que proporcionan una interfaz de usuario enfocada en git, permitiendo más operaciones que las posibles en la botonera de RStudio. Tarea para la casa.
-
-
-
-
-
-
-
-# Torpedo
+## Recordatorios {.medium-par}
 
 **git add .**: poner todo en escena
 
@@ -829,7 +911,11 @@ Existen alternativas intermedias como GitKraken, que proporcionan una interfaz d
 
 
 
-# Material de consulta
+## Referencias {.medium-par}
+
+[Ciencia Social Abierta - Prof. Juan Carlos Castillo](https://cienciasocialabierta.netlify.app/class/08-class/)
+
+[Documentación oficial de git](https://git-scm.com/doc)
 
 [Guía muy completa en español](https://git-scm.com/book/es/v2)
 
@@ -838,21 +924,22 @@ Existen alternativas intermedias como GitKraken, que proporcionan una interfaz d
 
 
 
-template: portada
 
 
 
 
 
+# 
 
+[<img src="imagenes/logo_portada2.png" width="20%"/>]{.center-justified}
 
-# Ejemplo de uso
+[**INE Educa: Clases abiertas de R**]{.big-par .center-justified}
 
+[**Git para usuarios y usuarias de R**]{.big-par .center-justified}
 
-.pull-center[
-<img src="imagenes/esquema_git.png" width="800" />
-]
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
+[**Diciembre 2023**]{.big-par .center-justified}
 
 
 

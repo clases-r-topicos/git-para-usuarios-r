@@ -330,10 +330,10 @@
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <p><span class="center-justified"><img src="imagenes/logo_portada2.png" width="20%"></span></p>
-<p><span class="big-par center-justified"><strong>Mentoría Censo: Codificación</strong></span></p>
+<p><span class="big-par center-justified"><strong>INE Educa: Clases abiertas de R</strong></span></p>
+<p><span class="big-par center-justified"><strong>Git para usuarios y usuarias de R</strong></span></p>
 <p><span class="big-par center-justified"><strong>Proyecto Ciencia de Datos</strong></span></p>
-<p><span class="big-par center-justified"><strong>Introducción al Procesamiento de Lenguaje Natural</strong></span></p>
-<p><span class="big-par center-justified"><strong>octubre 2023</strong></span></p>
+<p><span class="big-par center-justified"><strong>Diciembre 2023</strong></span></p>
 </section>
 <section id="bienvenidas-y-bienvenidos" class="slide level2">
 <h2>Bienvenidas y bienvenidos</h2>
@@ -351,7 +351,7 @@
 <li>Uso de ramas</li>
 <li>El .gitignore</li>
 <li>Casos de uso</li>
-<li>Recomendaciones sobre uso de git]</li>
+<li>Recomendaciones sobre uso de git</li>
 </ul>
 </div>
 <div class="fragment">
@@ -368,11 +368,11 @@
 <ul>
 <li class="fragment"><p>La clase no está pensada para ser seguida en vivo. Se recomienda hacerlo cuando sea subida a las redes sociales del INE.</p></li>
 <li class="fragment"><p>Se recomienda seguir la clase desde computadores personales, pues plataformas como <code>GitHub</code> suelen estar sujetas a bloqueos institucionales.</p></li>
-<li class="fragment"><p>La clase se realizará utilizando <code>GitHub</code> como plataforma de control de versiones. Es necesario crear una cuenta cuando para seguir la clase.</p>
+<li class="fragment"><p>La clase se realizará utilizando <code>GitHub</code> como plataforma de control de versiones. Es necesario crear una cuenta para seguir la clase en su totalidad.</p>
 <ul>
 <li class="fragment">Otras alternativas: <code>Gitlab</code>, <code>Bitbucket</code>.</li>
 </ul></li>
-<li class="fragment"><p>La clase está basada en Sistemas Operativos Windows, sin embargo, no debiesen existir grandes diferencias al aplicar lo enseñado en Sistemas de Mac o Linux.</p></li>
+<li class="fragment"><p>La clase está basada en Sistemas Operativos Windows, sin embargo, no debiesen existir grandes diferencias al aplicar lo enseñado en Sistemas Mac o Linux.</p></li>
 </ul>
 </div>
 </section>
@@ -404,9 +404,12 @@
 <li><p>Cada cierto tiempo sacamos una “foto” del estado de todos los archivos del proyecto</p></li>
 <li><p>Estas fotos no desaparecen</p></li>
 <li><p>Siempre es posible volver a una foto anterior</p></li>
+<li><p>Incluyen nombre y fecha de quién sacó la foto, además de un mensaje explicativo de qué cambios incluye</p></li>
 </ul>
-<p>Además, nos dice quién hizo qué y cuándo en nuestro proyecto</p>
 <p>Permite que varias personas trabajen en un mismo proyecto sin molestarse unos a otros</p>
+</div>
+<div class="fragment">
+<p><img data-src="imagenes/version_control.png" style="width:70.0%"> <span class="pull-right"><font size="2"> Ilustración por Sara A. Metwalli, https://saraametwalli.medium.com/</font></span></p>
 </div>
 </section>
 <section id="qué-es-git-y-para-qué-sirve-2" class="slide level2 medium-par">
@@ -514,7 +517,10 @@
 <div class="fragment" data-fragment-index="2">
 <ul>
 <li><p>Para aterrizar los conceptos usaremos el proyecto de creación de un escritorio como analogía.</p></li>
-<li><p>En este momento nuestro escritorio es solo un plan: un repositorio vacío.</p></li>
+<li><p>En este momento nuestro escritorio es solo un plan: un repositorio vacío.</p>
+<ul>
+<li>Tenemos una idea de qué queremos construir, pero no sabemos el camino exacto: materiales, colores, formas pueden ir cambiando en el camino.</li>
+</ul></li>
 <li><p>En la medida en que vayamos avanzando iremos haciendo <em>commits</em> que guarden nuestro progreso.</p></li>
 <li><p>Por ejemplo, luego de tomar una tabla, cortarla, barnizarla, etc, tenemos nuestro primer hito: tenemos una pata lista.</p>
 <ul>
@@ -568,11 +574,12 @@
 <p>Si quiero trabajar de manera individual, no necesito más que lo que hemos visto hasta ahora</p>
 </div>
 <div class="fragment">
-<p><strong>Creemos nuestro primer repositorio!</strong></p>
+<p><strong>Creemos nuestro primer repositorio en RStudio y hagamos nuestros primeros commit!</strong></p>
 </div>
 <aside class="notes">
 <ul>
 <li>La parte de la pata se llama tope</li>
+<li>Creamos proyecto git desde RStudio (File-&gt;New Project)</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -634,153 +641,288 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="esquema-de-trabajo-en-git" class="slide level2">
-<h2>Esquema de trabajo en Git</h2>
-<p><img src="https://i.gifer.com/2DAN.gif" width="450"></p>
-<p>Los commit nos permiten sujetarnos a la roca</p>
-<p>En terreno peligroso, es mejor hacer más commits.</p>
-<p>Si nos caemos, tendremos un punto del cual sujetarnos</p>
-</section>
-<section id="esquema-de-trabajo-en-git-1" class="slide level2">
+<section id="esquema-de-trabajo-en-git" class="slide level2 medium-par">
 <h2>Esquema de trabajo en Git</h2>
 <p>Luego de hacer nuestros <em>commit</em>, usualmente vamos a querer enviarlos al repositorio remoto para que el resto pueda verlos a través de un <em>push</em></p>
 <p>Antes de hacer un <em>push</em>, es necesario actualizar nuestro proyecto con los cambios que otros/as colegas puedan haber realizado desde la última vez que nos sincronizamos con el repositorio remoto. Para esto, usamos <code>git pull</code></p>
 <p>Si es que fue posible traer los cambios remotos <strong>sin problemas</strong> y teniendo seguridad que nuestro código funciona, procedemos a empujar nuestros cambios con un <code>git push</code></p>
 <p>Por lo tanto, el flujo normal de trabajo es siempre:</p>
-</section>
-<section id="commit---pull---push" class="slide level2">
-<h2>commit - pull - push</h2>
-<div style="float: left;">
-<p><img src="imagenes/no_olvidar.png" width="65%"></p>
+<div class="fragment big-par">
+<p><strong>commit - pull - push</strong></p>
 </div>
-<p>&lt;! EJERCICIO 1 &gt;</p>
-<p><strong>Probemos nuestro primer flujo <code>git</code>! </strong></p>
-<p>template: diapo-basica</p>
-</section></section>
-<section id="sin-problemas" class="title-slide slide level1 center">
-<h1>¿Sin problemas?</h1>
-<p>Al hacer <code>pull</code> traemos los cambios que han hecho el resto de colegas a nuestro repositorio local y <code>git</code> trata de incorporarlo con los <code>commit</code> que hemos realizado desde la última vez que hicimos <code>pull</code>. A esto se le llama <code>merge</code>.</p>
-<p>Si los cambios que existen en nuestros <code>commit</code> no tienen intersección con los de los <code>commit</code> de nuestros colegas, no habrá problema. Dos casos:</p>
-<ul>
-<li><p>Cambios en archivos diferentes</p></li>
-<li><p>Cambios en el mismo archivo, pero distintas líneas</p></li>
-</ul>
-<p>Ahora, si nuestros <code>commit</code> y algún <code>commit</code> recibido en el <code>pull</code> cambian la misma línea de un archivo, tendremos .red[problemas]: un conflicto de <em>merge</em>.</p>
-<p>.center[ <img src="imagenes/git_merge.gif" width="35%">]</p>
-<p>&lt;! EJERCICIO 2 &gt; <strong>Probemos cómo generar y resolver un conflicto de merge</strong></p>
+<div class="fragment">
+<p><img data-src="imagenes/no_olvidar.png" class="pull-left" style="width:25.0%"></p>
+</div>
 </section>
-
-<section id="conflicto-de-merge" class="title-slide slide level1 center">
-<h1>Conflicto de merge</h1>
+<section id="sin-problemas" class="slide level2 medium-par">
+<h2>¿Sin problemas?</h2>
+<div class="fragment">
+<p>Al hacer <code>pull</code> traemos los cambios que han hecho el resto de colegas a nuestro repositorio local y <code>git</code> trata de incorporarlo con los <code>commit</code> que hemos realizado desde la última vez que hicimos <code>pull</code>. A esto se le llama <code>merge</code>.</p>
+</div>
+<div class="fragment">
+<p>Si los cambios que existen en nuestros <code>commit</code> no tienen intersección con los de los <code>commit</code> de nuestros colegas, no habrá problema. Dos casos:</p>
+</div>
+<div class="fragment">
+<ul>
+<li>Cambios en archivos diferentes</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Cambios en el mismo archivo, pero distintas líneas</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Ahora, si nuestros <code>commit</code> y algún <code>commit</code> recibido en el <code>pull</code> cambian la misma línea de un archivo, tendremos <span class="red">problemas</span>: un conflicto de <em>merge</em>.</p>
+</div>
+<div class="fragment">
+<p><img src="imagenes/git_merge.gif" width="35%"></p>
+</div>
+<div class="fragment">
+<p><strong>Probemos cómo generar y resolver un conflicto de merge</strong></p>
+</div>
+</section>
+<section id="conflicto-de-merge" class="slide level2 medium-par">
+<h2>Conflicto de merge</h2>
+<div class="fragment">
 <div style="float: left;">
 <p><img src="imagenes/merge_conflict1.png" width="90%"></p>
 </div>
-<p>&lt; Su script se verá similar a esto</p>
+<p>&lt;– Su script se verá similar a esto</p>
+</div>
+<div class="fragment">
 <p>Básicamente <code>git</code> nos muestra cómo están las líneas que tienen cambios simultáneos en nuestro repositorio y en el script en el repositorio remoto.</p>
 <p>Aquí debemos editar el script para que quede funcional, de acuerdo a los objetivos del proyecto y del script. Para esto no existe receta, podrían mantenerse ambos cambios, uno de los dos o ninguno:</p>
-<p>.center[ <img src="imagenes/merge_conflict2.png" width="85%">]</p>
+</div>
+<div class="fragment">
+<p><img src="imagenes/merge_conflict2.png" width="85%"></p>
 <p>Luego de editar el script, es necesario realizar un <code>commit</code> y luego un <code>push</code> con lo que se soluciona el conflicto de <code>merge</code>.</p>
+</div>
+<div class="fragment">
 <p><strong>Nota importante:</strong> cuando hacemos un <code>pull</code> con conflicto de <code>merge</code>, nos aparecerán todos los cambios al repositorio que ha habido desde la última vez que hicimos <code>pull</code> en la pestaña Git. Solo debemos preocuparnos por los archivos que aparezcan con un símbolo de “U”, que implican que ese archivo específico tiene conflicto de merge.</p>
+</div>
 </section>
-
-<section id="conflicto-de-merge-1" class="title-slide slide level1 center">
-<h1>Conflicto de merge</h1>
+<section id="conflicto-de-merge-1" class="slide level2 medium-par">
+<h2>Conflicto de merge</h2>
 <p>Ejemplo de lo anterior:</p>
-<p>.center[ <img src="imagenes/merge_conflict3.png" width="85%">]</p>
+<p><img src="imagenes/merge_conflict3.png" width="85%"></p>
 <p>La terminal también nos indicará los archivos con conflicto:</p>
-<p>.center[ <img src="imagenes/merge_conflict4.png" width="85%">]</p>
+<p><img src="imagenes/merge_conflict4.png" width="85%"></p>
 </section>
-
-<section id="el-árbol-de-commits" class="title-slide slide level1 center">
-<h1>El árbol de commits</h1>
+<section id="el-árbol-de-commits" class="slide level2 medium-par">
+<h2>El árbol de commits</h2>
 <div style="float: right;">
 <p><img src="imagenes/arbol_commit1.gif" width="80%"></p>
 </div>
-<p>.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]</p>
-<p>.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]</p>
-<p>.texto-chico[<strong>¿Qué es una rama?</strong> ]</p>
-<p>.texto-chico[Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros. ]</p>
+<div class="fragment">
+<p>El árbol de commits es una representación visual de la historia de nuestro proyecto.</p>
+</div>
+<div class="fragment">
+<p>Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.</p>
+</div>
+<div class="fragment">
+<p><strong>¿Qué es una rama?</strong> Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros.</p>
+</div>
 </section>
-
-<section id="el-árbol-de-commits-1" class="title-slide slide level1 center">
-<h1>El árbol de commits</h1>
+<section id="el-árbol-de-commits-1" class="slide level2 medium-par">
+<h2>El árbol de commits</h2>
 <div style="float: right;">
 <p><img src="imagenes/arbol_commit2.gif" width="80%"></p>
 </div>
-<p>.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]</p>
-<p>.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]</p>
-<p>.texto-chico[<strong>¿Qué es una rama?</strong> ] .texto-chico[Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros. ]</p>
-<p>.texto-chico[ Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.]</p>
+<p>El árbol de commits es una representación visual de la historia de nuestro proyecto.</p>
+<p>Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.</p>
+<p><strong>¿Qué es una rama?</strong> Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros.</p>
+<p>Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.</p>
 </section>
-
-<section id="el-árbol-de-commits-2" class="title-slide slide level1 center">
-<h1>El árbol de commits</h1>
+<section id="el-árbol-de-commits-2" class="slide level2 medium-par">
+<h2>El árbol de commits</h2>
 <div style="float: right;">
 <p><img src="imagenes/arbol_commit3.gif" width="80%"></p>
 </div>
-<p>.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]</p>
-<p>.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]</p>
-<p>.texto-chico[<strong>¿Qué es una rama?</strong> ] .texto-chico[Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros. ]</p>
-<p>.texto-chico[ Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.]</p>
-<p>.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]</p>
+<p>El árbol de commits es una representación visual de la historia de nuestro proyecto.</p>
+<p>Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.</p>
+<p><strong>¿Qué es una rama?</strong> Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros.</p>
+<p>Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.</p>
+<p>La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos</p>
 </section>
-
-<section id="el-árbol-de-commits-3" class="title-slide slide level1 center">
-<h1>El árbol de commits</h1>
+<section id="el-árbol-de-commits-3" class="slide level2 medium-par">
+<h2>El árbol de commits</h2>
 <div style="float: right;">
 <p><img src="imagenes/arbol_commit4.gif" width="80%"></p>
 </div>
-<p>.texto-chico[El árbol de commits es una representación visual de la historia de nuestro proyecto.]</p>
-<p>.texto-chico[Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.]</p>
-<p>.texto-chico[<strong>¿Qué es una rama?</strong> ] .texto-chico[Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros. ]</p>
-<p>.texto-chico[ Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.]</p>
-<p>.texto-chico[La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos]</p>
-<p>.texto-chico[Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -&gt; Version control -&gt; History.]</p>
+<p>El árbol de commits es una representación visual de la historia de nuestro proyecto.</p>
+<p>Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.</p>
+<p><strong>¿Qué es una rama?</strong> Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros.</p>
+<p>Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.</p>
+<p>La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos</p>
+<p>Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -&gt; Version control -&gt; History.</p>
 <p><strong>¡Veamos el árbol de <em>commits</em> de nuestro proyecto actual!</strong></p>
 </section>
-
-<section id="trabajando-con-ramas" class="title-slide slide level1 center">
-<h1>Trabajando con ramas</h1>
-<p>Es la forma más segura de trabajar en git: nuestro trabajo no tocará la rama principal hasta que lo decidamos</p>
-<p>Cada desarrollador puede trabajar en una rama independiente, sin molestar a los demás</p>
-<p>En proyectos grandes, los desarrolladores <strong>en general</strong> no tienen permiso para empujar directamente a la rama main/master, tienen que “pedir permiso” para hacerlo</p>
-<p>Existe un administrador encargado de revisar y unir (<code>merge</code>) las contribuciones a la rama central</p>
-<ul>
-<li><p>Decide si el aporte debe incorporarse</p></li>
-<li><p>Resuelve conflictos</p></li>
-</ul>
-<p>Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer <code>commit</code>, <code>push</code> y <code>pull</code></p>
-<p><strong>¡Creemos nuestras primeras ramas!</strong></p>
+<section id="el-árbol-de-commits-4" class="slide level2 medium-par">
+<h2>El árbol de commits</h2>
+<div style="float: right;">
+<p><img src="imagenes/arbol_commit5.gif" width="80%"></p>
+</div>
+<p>El árbol de commits es una representación visual de la historia de nuestro proyecto.</p>
+<p>Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dónde nos encontramos actualmente en la historia del árbol y dónde se encuentran las otras ramas, en caso de existir.</p>
+<p><strong>¿Qué es una rama?</strong> Simplemente es un puntero a un <code>commit</code> específico, que contiene la información de sus ancestros.</p>
+<p>Si nos encontramos parados en una rama y realizamos un <code>commit</code> el puntero de la rama se moverá al commit más reciente.</p>
+<p>La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos</p>
+<p>Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -&gt; Version control -&gt; History.</p>
+<p><strong>¡Veamos el árbol de <em>commits</em> de nuestro proyecto actual!</strong></p>
 </section>
-
-<section id="el-.gitignore" class="title-slide slide level1 center">
-<h1>El .gitignore</h1>
+<section id="trabajando-con-ramas" class="slide level2 medium-par">
+<h2>Trabajando con ramas</h2>
+<div>
+<ul>
+<li class="fragment"><p>Es la forma más segura de trabajar en git: nuestro trabajo no tocará la rama principal hasta que lo decidamos</p></li>
+<li class="fragment"><p>Cada persona desarrolladora puede trabajar en una rama independiente, sin molestar a los demás</p></li>
+<li class="fragment"><p>En proyectos grandes, quienes desarrollan el proyecto, <strong>en general</strong>, no tienen permiso para empujar directamente a la rama main/master, tienen que “pedir permiso” para hacerlo</p></li>
+<li class="fragment"><p>Existe una persona administradora encargada de revisar y unir (<code>merge</code>) las contribuciones a la rama central</p>
+<ul>
+<li class="fragment"><p>Decide si el aporte debe incorporarse</p></li>
+<li class="fragment"><p>Resuelve conflictos</p></li>
+</ul></li>
+<li class="fragment"><p>Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer <code>commit</code>, <code>push</code> y <code>pull</code></p></li>
+</ul>
+</div>
+</section>
+<section id="trabajando-con-ramas-1" class="slide level2 medium-par">
+<h2>Trabajando con ramas</h2>
+<div class="r-stack">
+<div class="fragment fade-in-then-out" data-fragment-index="3">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imagenes/escritorio_commit3.png"></p>
+<figcaption>Plan original (rama main)</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="4">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imagenes/escritorio_rama1.png"></p>
+<figcaption>Nuevo plan (rama prueba_cajon_redondo)</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="5">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imagenes/escritorio_rama2.png"></p>
+<figcaption>Nuevo plan commit #1 (rama prueba_cajon_redondo)</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="6">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imagenes/escritorio_rama3.png"></p>
+<figcaption>Nuevo plan commit #2 (rama prueba_cajon_redondo)</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="7">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imagenes/escritorio_commit3.png"></p>
+<figcaption>Plan original (rama main)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="1">
+<p>Por otro lado, las ramas son particularmente útiles en un contexto experimental: queremos probar una variación y no estamos seguros si será incorporada o no.</p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>Volvamos a nuestro mueble. Digamos que su estado de avance es el siguiente:</p>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p>Sin embargo, se nos ocurre innovar y probar un nuevo tipo de cajón</p>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p>Avanzamos en nuestros commits</p>
+</div>
+<div class="fragment" data-fragment-index="6">
+<p>Terminamos nuestro experimento y vemos que no nos resultó satisfactorio</p>
+</div>
+<div class="fragment" data-fragment-index="7">
+<p>Podemos volver sin problemas a nuestro commit inicial y abandonar nuestra rama</p>
+</div>
+<div class="fragment">
+<p><strong>¡Probemos en RStudio cómo crear nuestras primeras ramas!</strong></p>
+</div>
+</section>
+<section id="el-.gitignore" class="slide level2 medium-par">
+<h2>El .gitignore</h2>
+<div class="fragment">
 <p>Cuando trabajamos con repositorios remotos, muchas veces existen archivos que queremos mantener solo en nuestro computador o que no son realmente compatibles con un repositorio git, por lo que no queremos subirlos a la nube:</p>
+</div>
+<div class="fragment">
 <div style="float: right;">
 <p><img src="imagenes/gitignore.png" width="90%"></p>
 </div>
+</div>
+<div>
 <ul>
-<li><p>Archivos que no son pertinentes al objetivo del proyecto.</p></li>
-<li><p>Archivos temporales y de caché.</p></li>
-<li><p>Archivos personales (por ejemplo, .Rprofile, scripts de pruebas).</p></li>
-<li><p>Archivos muy grandes (por ejemplo, tablas de datos pesadas).</p></li>
+<li class="fragment"><p>Archivos que no son pertinentes al objetivo del proyecto.</p></li>
+<li class="fragment"><p>Archivos temporales y de caché.</p></li>
+<li class="fragment"><p>Archivos personales (por ejemplo, .Rprofile, scripts de pruebas).</p></li>
+<li class="fragment"><p>Archivos muy grandes (por ejemplo, tablas de datos pesadas).</p></li>
 </ul>
+</div>
+<div class="fragment">
 <p>Estos los anotamos en el archivo .gitignore, que es un archivo de texto simple.</p>
+</div>
+<div class="fragment">
 <p><strong>Importante:</strong> .gitignore tiene algunas notaciones particulares, pero lo más relevante es que el * sirve como comodín</p>
+</div>
+<div class="fragment">
 <p><strong>¡Hagamos pruebas de uso del .gitignore!</strong></p>
+</div>
 </section>
-
-<section id="recomendaciones-sobre-cómo-interactuar-con-git" class="title-slide slide level1 center">
-<h1>Recomendaciones sobre cómo interactuar con git</h1>
-<p>Revisamos cómo interactuar con git a través de la terminal y RStudio</p>
-<p><strong>¿Cuál es mejor?</strong></p>
-<p>No hay una respuesta correcta, depende de cada persona. La botonera es más sencilla, pero, por lo mismo, más incompleta y menos transparente.</p>
-<p>Recomendación general: si es que les acomoda, para operaciones más sencillas (<code>add</code>, <code>commit</code>, <code>push</code>, <code>pull</code>), la botonera de RStudio basta. Si queremos dar un uso más avanzado, la terminal puede darnos más control.</p>
-<p>Existen alternativas intermedias como GitKraken, que proporcionan una interfaz de usuario enfocada en git, permitiendo más operaciones que las posibles en la botonera de RStudio. Tarea para la casa.</p>
+<section id="casos-de-uso-dentro-del-ine" class="slide level2">
+<h2>Casos de uso dentro del INE</h2>
+<ul>
+<li><p>Un equipo dentro del INE necesitaba reformular la imputación de una de sus variables. Este era un proceso complejo, por lo que fue necesario el uso de una rama para su desarrollo.</p></li>
+<li><p>La marcha blanca de una encuesta contenía scripts que eran diferentes al del resto del procesamiento de la encuesta. Para no tener que lidiar con ellos, se optó por marcar el commit final de la marcha blanca con una rama, luego, si era necesario volver a esos scripts, bastaba con realizar un <code>git checkout scripts_mb</code> para volver a estos.</p></li>
+<li><p>Luego de sincronizar mi código con lo que está en la nube (<code>git pull</code>) cierto código dejó de funcionar. Bastó con revisar el historial de commits para notar quién había hecho cambios en el script, lo que permitió resolver el problema rápidamente luego de una conversación.</p></li>
+</ul>
 </section>
-
-<section id="torpedo" class="title-slide slide level1 center">
-<h1>Torpedo</h1>
+<section id="recomendaciones-sobre-cómo-interactuar-con-git" class="slide level2 medium-par">
+<h2>Recomendaciones sobre cómo interactuar con git</h2>
+<p>En esta clase nos centramos en la interacción con git a través de RStudio</p>
+<p>Este nos permite acceder a los comandos básicos que revisamos</p>
+<p>Sin embargo, si queremos hacer un uso más avanzado de git, tendríamos que usar la consola</p>
+<p>Algunos comandos a los que no tenemos acceso desde RStudio: <code>git merge</code>, <code>git tag</code>, <code>git cherry-pick</code>, <code>git status</code>, <code>git reset</code> (con todas sus opciones)</p>
+<p>En particular para el merge de ramas, usar la consola nos resultará inevitable.</p>
+</section>
+<section id="resumiendo" class="slide level2">
+<h2>Resumiendo</h2>
+<div>
+<ul>
+<li class="fragment"><p>Aprendimos qué es git, cuándo usarlo y cuándo no</p></li>
+<li class="fragment"><p>Revisamos conceptos básicos y su aplicación en RStudio</p></li>
+<li class="fragment"><p>Revisamos algunos casos de uso dentro de las oficinas del INE</p></li>
+</ul>
+<aside class="notes">
+<p>Con esto debiésemos quedar al menos habilitados para un uso básico de git.</p>
+<p>Recomendación: practicar, practicar, practicar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="recordatorios" class="slide level2 medium-par">
+<h2>Recordatorios</h2>
 <p><strong>git add .</strong>: poner todo en escena</p>
 <p><strong>git commit -m “mensaje personalizado”</strong>: confirmar cambios</p>
 <p><strong>git push nombre_rama</strong>: empujar a rama remota</p>
@@ -790,17 +932,20 @@
 <p><strong>git branch</strong>: ver todas las ramas</p>
 <p><strong>git branch nombre_rama</strong>: crear una rama</p>
 </section>
-
-<section id="material-de-consulta" class="title-slide slide level1 center">
-<h1>Material de consulta</h1>
+<section id="referencias" class="slide level2 medium-par">
+<h2>Referencias</h2>
+<p><a href="https://cienciasocialabierta.netlify.app/class/08-class/">Ciencia Social Abierta - Prof.&nbsp;Juan Carlos Castillo</a></p>
+<p><a href="https://git-scm.com/doc">Documentación oficial de git</a></p>
 <p><a href="https://git-scm.com/book/es/v2">Guía muy completa en español</a></p>
 <p><a href="https://happygitwithr.com/">Git con enfoque en R</a></p>
-<p>template: portada</p>
-</section>
-
-<section id="ejemplo-de-uso" class="title-slide slide level1 center">
-<h1>Ejemplo de uso</h1>
-<p>.pull-center[ <img src="imagenes/esquema_git.png" width="800">]</p>
+</section></section>
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+<p><span class="center-justified"><img src="imagenes/logo_portada2.png" width="20%"></span></p>
+<p><span class="big-par center-justified"><strong>INE Educa: Clases abiertas de R</strong></span></p>
+<p><span class="big-par center-justified"><strong>Git para usuarios y usuarias de R</strong></span></p>
+<p><span class="big-par center-justified"><strong>Proyecto Ciencia de Datos</strong></span></p>
+<p><span class="big-par center-justified"><strong>Diciembre 2023</strong></span></p>
 <p><img src="imagenes/logo_portada2.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
