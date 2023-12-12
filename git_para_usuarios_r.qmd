@@ -43,22 +43,21 @@ engine: knitr
 ## Contenidos de la clase {.medium-par}
 
 
-::: fragment
 - ¿Qué es Git y para qué sirve?
 - Principales conceptos asociados a Git
-- Esquema de trabajo en git
-- Conflictos de merge
 - Árbol de commits
 - Uso de ramas
+- Trabajo remoto
+- Conflictos de merge
 - El .gitignore
 - Casos de uso
 - Recomendaciones sobre uso de git
-:::
+
 
 ::: fragment
 **Objetivo de la clase**
 
-- Habilitar en el uso básico de git (git clone, git push, git pull) en conjunto con la herramienta Rstudio
+- Mostrar herramientas que permiten el uso básico de git (git clone, git push, git pull) en conjunto con la herramienta Rstudio
 :::
 
 
@@ -222,7 +221,7 @@ Aún nos falta manejar las dependencias para llegar al estándar dorado (sistema
 
 ::: incremental
 - Proyectos de desarrollo lineal (no hay necesidad de volver atrás).
-- Proyectos que no estén basados en texto plano (por ejemplo, archivos .docx de Microsoft Word).
+- Proyectos cuyos documentos principales (scripts o documentaciones) no estén basados en texto plano (por ejemplo, archivos .docx de Microsoft Word).
 - Proyectos de muy baja complejidad (el costo de implementarlo resulta mayor al beneficio).
 
 :::
@@ -230,6 +229,12 @@ Aún nos falta manejar las dependencias para llegar al estándar dorado (sistema
 ::: fragment
 
 ![](imagenes/blob.jpg){height=200}
+:::
+
+::: notes
+- Tema de documento principal es para no confundir con formatos tipo .csv, que son texto plano, pero tampoco sirven en 
+control de versiones.
+
 :::
 
 
@@ -268,6 +273,14 @@ Tenemos 3 estados para nuestros archivos:
 - "En escena" (*staging area*)
 
 - Confirmado o comprometido (*committed*)
+
+
+::: notes
+- Mencionar que uno puede tener cambios en varios archivos al mismo tiempo y no necesariamente
+quiere juntarlos todos en un commit (puede ser demasiada información). Por esto existe un paso intermedio
+antes del commit.
+
+:::
 
 
 ## El mueble {.medium-par}
@@ -350,207 +363,24 @@ Cada _commit_ es una foto del estado de nuestros archivos a la que podemos acced
 
 ::::
 
-::: fragment
-Si quiero trabajar de manera individual, no necesito más que lo que hemos visto hasta ahora
-:::
+
 
 :::fragment
 
-**Creemos nuestro primer repositorio en RStudio y hagamos nuestros primeros commit!**
+**Creemos nuestro primer repositorio en RStudio y realicemos nuestros `commit` iniciales!**
 
 :::
+
 
 ::: notes
 
 - La parte de la pata se llama tope
 - Creamos proyecto git desde RStudio (File->New Project)
+- Ser claro en que es pseudo-código, que la idea es pasa bastante tiempo entre commit y commit
+y que es un proyecto complejo.
 
 
 :::
-
-
-
-## Principales conceptos {.medium-par}
-
-
-**¿Qué pasa si necesito trabajar con más personas? ¿Si quiero un respaldo online de mi trabajo?**
-
-::: fragment
-<img src="imagenes/diagrama-git.png" width="600" /> 
-
-
-
-**Gitlab, Github, etc se usan para trabajar con más personas, agregando el concepto
-del repositorio remoto**
-
-:::
-
-## Principales conceptos
-
-<img src="imagenes/flujo_git.png" width="480" /> 
-[ <font size="2"> Ilustración por Allison Horst, https://allisonhorst.com/git-github</font> ]{.pull-right}
-
-
-
-
-
-## Repositorio remoto {.medium-par}
-
-
-<img src="imagenes/diagrama-colaborativo.png" width="600" />
-
-
-
-**Varias personas aportan a un mismo repositorio**
-
-::: {layout-ncol=2}
-
-::: fragment
-![](imagenes/logos.png){width=20%}
-:::
-
-::: fragment
-![](imagenes/logo_distinto.png){width=20%}
-:::
-
-:::
-
-::: fragment
-
-**Veamos cómo crear y clonar un repositorio remoto**
-
-:::
-
-
-::: notes
-
-- Ir a Github
-- Crear repo
-- Mostrar cómo clonar con SSH
-- Mostrar cómo clonar con Token
-
-
-:::
-
-
-
-
-
-
-## Esquema de trabajo en Git {.medium-par}
-
-Luego de hacer nuestros _commit_, usualmente vamos a querer enviarlos al repositorio
-remoto para que el resto pueda verlos a través de un _push_
-
-
-
-Antes de hacer un _push_, es necesario actualizar nuestro proyecto con los cambios que otros/as colegas puedan haber realizado desde la última vez que nos sincronizamos con el repositorio remoto. Para esto, usamos `git pull`
-
-
-
-Si es que fue posible traer los cambios remotos **sin problemas** y teniendo seguridad que nuestro código funciona, procedemos a empujar nuestros cambios con un `git push`
-
-
-
-Por lo tanto, el flujo normal de trabajo es siempre:
-
-
-::: {.fragment .big-par}
-**commit - pull - push**
-:::
-
-::: fragment
-![](imagenes/no_olvidar.png){.pull-left width=25%}
-
-:::
-
-## ¿Sin problemas? {.medium-par}
-
-::: fragment
-Al hacer `pull` traemos los cambios que han hecho el resto de colegas a nuestro
-repositorio local y `git` trata de incorporarlo con los `commit` que hemos realizado
-desde la última vez que hicimos `pull`. A esto se le llama `merge`.
-:::
-
-::: fragment
-Si los cambios que existen en nuestros `commit` no tienen intersección con los de
-los `commit` de nuestros colegas, no habrá problema. Dos casos:
-:::
-
-::: fragment
-- Cambios en archivos diferentes
-:::
-
-::: fragment
-- Cambios en el mismo archivo, pero distintas líneas
-:::
-
-::: fragment
-Ahora, si nuestros `commit` y algún `commit` recibido en el `pull` cambian la misma
-línea de un archivo, tendremos [problemas]{.red}: un conflicto de _merge_.
-:::
-
-
-::: fragment
-<img src="imagenes/git_merge.gif" width="35%" />
-:::
-
-::: fragment
-**Probemos cómo generar y resolver un conflicto de merge**
-:::
-
-
-
-## Conflicto de merge {.medium-par}
-
-::: fragment
-<div style="float: left;">
-<img src="imagenes/merge_conflict1.png" width="90%" />
-</div>
-
-
-<-- Su script se verá similar a esto
-:::
-
-
-
-::: fragment
-Básicamente `git` nos muestra cómo están las líneas que tienen cambios simultáneos en nuestro repositorio y en el script en el repositorio remoto.
-
-Aquí debemos editar el script para que quede funcional, de acuerdo a los objetivos del proyecto y del script. Para esto no existe receta, podrían mantenerse ambos cambios, uno de los dos o ninguno:
-:::
-
-
-::: fragment
-<img src="imagenes/merge_conflict2.png" width="85%" />
-
-
-
-
-Luego de editar el script, es necesario realizar un `commit` y luego un `push` con lo que se soluciona el conflicto de `merge`.
-:::
-
-::: fragment
-**Nota importante:** cuando hacemos un `pull` con conflicto de `merge`, nos aparecerán todos los cambios al repositorio que ha habido desde la última vez que hicimos `pull`  en la pestaña Git. Solo debemos preocuparnos por los archivos que aparezcan con un símbolo de “U”, que implican que ese archivo específico tiene conflicto de merge.
-:::
-
-
-
-
-## Conflicto de merge {.medium-par}
-
-Ejemplo de lo anterior:
-
-
-<img src="imagenes/merge_conflict3.png" width="85%" />
-
-La terminal también nos indicará los archivos con conflicto:
-
-
-<img src="imagenes/merge_conflict4.png" width="85%" />
-
-
-
 
 
 ## El árbol de commits {.medium-par}
@@ -569,7 +399,7 @@ Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dón
 :::
 
 ::: fragment
-**¿Qué es una rama?** Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+**¿Qué es una rama?** Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros (commits anteriores a este). 
 :::
 
 
@@ -590,7 +420,7 @@ Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dón
 
 
 **¿Qué es una rama?** 
-Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros (commits anteriores a este). 
 
 
 Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
@@ -618,14 +448,18 @@ Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dón
 
 
 **¿Qué es una rama?** 
-Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros (commits anteriores a este). 
 
 
  Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
 La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
 
+::: fragment
+Cada rama es independiente en este sentido, por lo que los cambios que aquí se realicen no estarán 
+presentes en la rama principal hasta que uno lo decida
 
+:::
 
 ## El árbol de commits {.medium-par}
 
@@ -645,18 +479,18 @@ Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dón
 
 
 **¿Qué es una rama?** 
-Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros (commits anteriores a este). 
 
 
  Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
 La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
 
-Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.
+Cada rama es independiente en este sentido, por lo que los cambios que aquí se realicen no estarán 
+presentes en la rama principal hasta que uno lo decida
 
+Todo software compatible con `git` presenta alguna forma de acceder a este árbol; en Rstudio se encuentra en Tools -> Version control -> History.
 
-
-**¡Veamos el árbol de _commits_ de nuestro proyecto actual!**
 
 
 
@@ -679,19 +513,22 @@ Nos muestra cada commit, nos permite acceder a sus contenidos y nos muestra dón
 
 
 **¿Qué es una rama?** 
-Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros. 
+Simplemente es un puntero a un `commit` específico, que contiene la información de sus ancestros (commits anteriores a este). 
 
 
  Si nos encontramos parados en una rama y realizamos un `commit` el puntero de la rama se moverá al commit más reciente.
 
 La rama principal se llama main o master, que aloja la versión oficial de nuestro proyecto, pero podemos crear tantas como queramos
 
-Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstudio nos da acceso en Tools -> Version control -> History.
+Cada rama es independiente en este sentido, por lo que los cambios que aquí se realicen no estarán 
+presentes en la rama principal hasta que uno lo decida
+
+Todo software compatible con `git` presenta alguna forma de acceder a este árbol; en Rstudio se encuentra en Tools -> Version control -> History.
 
 
-
+::: fragment
 **¡Veamos el árbol de _commits_ de nuestro proyecto actual!**
-
+:::
 
 
 
@@ -719,8 +556,7 @@ Todo software presenta alguna forma de acceder a este árbol; en el caso de Rstu
 
 
 
-- Por ahora nos centraremos en el caso básico en que tenemos total libertad de hacer
-`commit`, `push` y `pull`
+- Por ahora nos centraremos en el caso básico en que tenemos total libertad subir nuestros cambios (más detalles en la sección de trabajo remoto).
 
 :::
 
@@ -779,10 +615,213 @@ Terminamos nuestro experimento y vemos que no nos resultó satisfactorio
 Podemos volver sin problemas a nuestro commit inicial y abandonar nuestra rama
 :::
 
+
+::: fragment
+Si quiero trabajar de manera individual, no necesito más que lo que hemos visto hasta ahora
+:::
+
 ::: fragment
 
 **¡Probemos en RStudio cómo crear nuestras primeras ramas!**
 :::
+
+
+::: notes
+
+- se llama manilla la parte del cajón donde lo agarro.
+
+- se llama tablero la parte donde apoyo cosas
+
+- invitar a ver el curso de git básico si no entiende la sintaxis
+
+:::
+
+
+## Trabajo remoto {.medium-par}
+
+
+**¿Qué pasa si necesito trabajar con más personas? ¿Si quiero un respaldo online de mi trabajo?**
+
+::: fragment
+<img src="imagenes/diagrama-git.png" width="600" /> 
+
+
+
+**Gitlab, Github, etc se usan para trabajar con más personas, agregando el concepto
+del repositorio remoto**
+
+:::
+
+## Trabajo remoto
+
+<img src="imagenes/flujo_git.png" width="480" /> 
+[ <font size="2"> Ilustración por Allison Horst, https://allisonhorst.com/git-github</font> ]{.pull-right}
+
+
+
+
+
+## Repositorio remoto {.medium-par}
+
+
+<img src="imagenes/diagrama-colaborativo.png" width="600" />
+
+
+
+**Varias personas aportan a un mismo repositorio**
+
+::: {layout-ncol=2}
+
+::: fragment
+![](imagenes/logos.png){width=20%}
+:::
+
+::: fragment
+![](imagenes/logo_distinto.png){width=20%}
+:::
+
+:::
+
+
+
+
+
+
+
+
+## Esquema de trabajo en Git {.medium-par}
+
+Luego de hacer nuestros _commit_, usualmente vamos a querer enviarlos al repositorio
+remoto para que el resto pueda verlos a través de un _push_
+
+
+
+Antes de hacer un _push_, es necesario actualizar nuestro proyecto con los cambios que otros/as colegas puedan haber realizado desde la última vez que nos sincronizamos con el repositorio remoto. Para esto, usamos `git pull`
+
+
+
+Si es que fue posible traer los cambios remotos **sin problemas** y teniendo seguridad que nuestro código funciona, procedemos a empujar nuestros cambios con un `git push`
+
+
+
+Por lo tanto, el flujo normal de trabajo es siempre:
+
+
+::: {.fragment .big-par}
+**commit - pull - push**
+:::
+
+::: fragment
+![](imagenes/no_olvidar.png){.pull-left width=23%}
+
+:::
+
+::: {.fragment .pull-right} 
+
+**Veamos cómo crear y clonar un repositorio remoto en Github**
+
+:::
+
+
+::: notes
+
+- Ir a Github
+- Crear repo
+- Mostrar cómo clonar con SSH
+- Mostrar cómo clonar con Token
+
+
+:::
+
+
+## ¿Sin problemas? {.medium-par}
+
+::: fragment
+Al hacer `pull` traemos los cambios que han hecho el resto de colegas a nuestro
+repositorio local y `git` trata de incorporarlo con los `commit` que hemos realizado
+desde la última vez que hicimos `pull`. A esto se le llama `merge`.
+:::
+
+::: fragment
+Si los cambios que existen en nuestros `commit` no tienen intersección con los de
+los `commit` de nuestros colegas, no habrá problema. Dos casos:
+:::
+
+::: fragment
+- Cambios en archivos diferentes
+:::
+
+::: fragment
+- Cambios en el mismo archivo, pero distintas líneas
+:::
+
+::: fragment
+Ahora, si nuestros `commit` y algún `commit` recibido en el `pull` cambian la misma
+línea de un archivo, tendremos [problemas]{.red}: un conflicto de _merge_.
+:::
+
+
+::: fragment
+<img src="imagenes/git_merge.gif" width="35%" />
+:::
+
+
+
+## Conflicto de merge {.medium-par}
+
+::: fragment
+<div style="float: left;">
+<img src="imagenes/merge_conflict1.png" width="90%" />
+</div>
+
+
+<-- Su script se verá similar a esto
+:::
+
+
+
+::: fragment
+Básicamente `git` nos muestra cómo están las líneas que tienen cambios simultáneos en nuestro repositorio y en el script en el repositorio remoto (o en el de la rama que queremos incorporar a través del `merge`).
+
+Aquí debemos editar el script para que quede funcional, de acuerdo a los objetivos del proyecto y del script. Para esto no existe receta, podrían mantenerse ambos cambios, uno de los dos o ninguno:
+:::
+
+
+::: fragment
+<img src="imagenes/merge_conflict2.png" width="85%" />
+
+
+
+
+Luego de editar el script, es necesario realizar un `commit` y luego un `push` con lo que se soluciona el conflicto de `merge`.
+:::
+
+::: fragment
+**Nota importante:** cuando hacemos un `pull` con conflicto de `merge`, nos aparecerán todos los cambios al repositorio que ha habido desde la última vez que hicimos `pull`  en la pestaña Git. Solo debemos preocuparnos por los archivos que aparezcan con un símbolo de “U”, que implican que ese archivo específico tiene conflicto de merge.
+:::
+
+
+
+
+## Conflicto de merge {.medium-par}
+
+Ejemplo de lo anterior:
+
+
+<img src="imagenes/merge_conflict3.png" width="85%" />
+
+La terminal también nos indicará los archivos con conflicto:
+
+
+<img src="imagenes/merge_conflict4.png" width="85%" />
+
+
+::: fragment
+**Probemos cómo generar y resolver un conflicto de merge**
+:::
+
+
+
 
 
 
@@ -829,7 +868,7 @@ Estos los anotamos en el archivo .gitignore, que es un archivo de texto simple.
 
 
 
-## Casos de uso dentro del INE
+## Casos de uso dentro del INE {.medium-par}
 
 - Un equipo dentro del INE necesitaba reformular la imputación de una de sus variables.
 Este era un proceso complejo, por lo que fue necesario el uso de una rama para su desarrollo.
@@ -841,6 +880,8 @@ Este era un proceso complejo, por lo que fue necesario el uso de una rama para s
 - Luego de sincronizar mi código con lo que está en la nube (`git pull`) cierto código dejó de funcionar. Bastó con revisar
 el historial de commits para notar quién había hecho cambios en el script, lo que permitió resolver el problema rápidamente
 luego de una conversación.
+
+![](imagenes/proyecto_real.png)
 
 
 ## Recomendaciones sobre cómo interactuar con git {.medium-par}
@@ -857,14 +898,23 @@ Algunos comandos a los que no tenemos acceso desde RStudio: `git merge `, `git t
 En particular para el merge de ramas, usar la consola nos resultará inevitable.
 
 
-## Resumiendo
+## Resumiendo {.medium-par}
 
 ::: incremental
 
 
 - Aprendimos qué es git, cuándo usarlo y cuándo no
 
-- Revisamos conceptos básicos y su aplicación en RStudio
+- Revisamos conceptos básicos y su aplicación en RStudio: 
+
+  - `add`
+  - `commit`
+  - `merge`
+  - `pull`
+  - `push`
+  - árboles de commits
+  - ramas
+  - .gitignore.
 
 - Revisamos algunos casos de uso dentro de las oficinas del INE
 
@@ -872,7 +922,7 @@ En particular para el merge de ramas, usar la consola nos resultará inevitable.
 
 ::: notes
 
-Con esto debiésemos quedar al menos habilitados para un uso básico de git.
+Si practicamos lo aprendido debiésemos quedar al menos habilitados para un uso básico de git.
 
 Recomendación: practicar, practicar, practicar.
 
@@ -882,20 +932,19 @@ Recomendación: practicar, practicar, practicar.
 
 
 
-
-
-
-## Recordatorios {.medium-par}
+## Comandos más comunes {.medium-par}
 
 **git add .**: poner todo en escena
 
+**git add <nombre_archivo>**: poner `<nombre_archivo>` en escena
+
 **git commit -m "mensaje personalizado"**: confirmar cambios
 
-**git push nombre_rama**: empujar a rama remota
+**git push nombre_rama**: empujar rama al remoto
 
-**git clone url_repositorio**: clonar un repositorio
+**git clone url_repositorio**: clonar un repositorio (puede ser por SSH o HTTPS)
 
-**git pull nombre_rama**: traer cosas del repositorio
+**git pull nombre_rama**: traer cambios de rama `nombre_rama` desde el repositorio remoto
 
 **git checkout nombre_rama**: ir a una rama
 
@@ -920,6 +969,8 @@ Recomendación: practicar, practicar, practicar.
 [Guía muy completa en español](https://git-scm.com/book/es/v2)
 
 [Git con enfoque en R](https://happygitwithr.com/)
+
+[Learn Git Branching](https://learngitbranching.js.org/?locale=es_ES)
 
 
 
