@@ -108,6 +108,22 @@ al aplicar lo enseñado en Sistemas Mac o Linux.
 
 :::
 
+::: notes
+Comentarios fotos:
+
+- A veces ping-poneamos versiones, cambiándole el nombre al archivo lo que puede llevar a 
+una pérdida del control de la información -quizás alguien está trabajando sobre una versión
+que no contiene todos los cambios-
+
+- En proyectos de naturaleza experimental nos gustaría tener el control de nuestros distintos
+experimentos
+
+- En proyectos grupales, nos gustaría saber quién hizo qué y cuándo, para poder trazar bien su
+evolución.
+
+
+
+:::
 
 ::::
 
@@ -138,6 +154,14 @@ Permite que varias personas trabajen en un mismo proyecto sin molestarse unos a 
 ![](imagenes/version_control.png){width=70%}
 [ <font size="2"> Ilustración por Sara A. Metwalli, https://saraametwalli.medium.com/</font> ]{.pull-right}
 :::
+
+::: notes
+
+- Comentario foto: tal vez esto ahora no hace mucho sentido, pero al final de la clase
+debiesen entender este diagrama.
+
+:::
+
 
 ## ¿Qué es Git y para qué sirve? {.medium-par}
 
@@ -228,7 +252,15 @@ Aún nos falta manejar las dependencias para llegar al estándar dorado (sistema
 
 ::: fragment
 
-![](imagenes/blob.jpg){height=200}
+**Pequeña excepción:** si queremos hacer público un proyecto, aunque no cumpla con las condiciones, las plataformas como Github son una buena forma de hacerlo.
+:::
+
+
+
+
+::: fragment
+
+![](imagenes/blob.jpg){height=150}
 :::
 
 ::: notes
